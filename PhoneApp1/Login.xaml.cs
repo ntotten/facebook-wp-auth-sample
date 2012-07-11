@@ -18,7 +18,7 @@ namespace PhoneApp1
     public partial class Login : PhoneApplicationPage
     {
         string oauthUrl = "https://www.facebook.com/dialog/oauth?client_id={0}&redirect_uri={1}&display=touch&response_type=token";
-        string facebookAppId = "183642511732233";
+        string facebookAppId = "your Facebook AppId here";
         string redirectUri = "https://www.facebook.com/connect/login_success.html";
 
         public Login()
@@ -30,6 +30,11 @@ namespace PhoneApp1
 
         void webBrowser1_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
+            if (facebookAppId == "your Facebook AppId here")
+            {
+                throw new ArgumentException("You must set the facebookAppId variable to your own Facebook App Id.");
+            }
+
             if (e.Uri.ToString().StartsWith(redirectUri))
             {
                 var client = new FacebookClient();
